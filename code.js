@@ -1,5 +1,8 @@
 figma.showUI(__html__, { width: 300, height: 400 });
 
+const allLayers = figma.currentPage.findAll();
+let $1
+
 const createFrame = item => {
     let frame = figma.createFrame();
     let x = item.x;
@@ -15,15 +18,47 @@ const createFrame = item => {
     item.y = 0;
 }
 
-figma.currentPage.findAll().forEach(item => {
-    if (item.name.includes("$1")) {
-        if (!item.layoutMode) {
-            createFrame(item)
-            item.name = item.name.replace('$1', '')
-            item.parent.layoutMode = "VERTICAL"
-            item.parent.paddingTop = 200
-            item.parent.paddingBottom = 200
-            console.log(item.parent)
+
+
+
+
+
+// const paddings = {
+
+// };
+
+const paddingControl = (paddings) => {
+    allLayers.forEach(item => {
+        const setPadding = (paddings) => {
+            item.parent.paddingTop = paddings.top
+            item.parent.paddingBottom = paddings.bottom
+            item.parent.paddingLeft = paddings.left
+            item.parent.paddingRight = paddings.right
         }
-    }
-});
+        figma.ui.onmessage = msg => {
+            if (msg.type === '$1') {
+                console.log(msg.value)
+                $1 = msg.value
+                setPadding($1)
+            }
+        }
+        if (item.name.includes(`${paddings}`)) {
+            if (!item.layoutMode) {
+                createFrame(item)
+                item.name = item.name.replace(`${paddings}`, '')
+                item.parent.layoutMode = "VERTICAL"
+                setPadding(paddings)
+            } else {
+                setPadding($1)
+                figma.ui.postMessage({
+                    top: item.paddingTop,
+                    left: item.paddingLeft,
+                    right: item.paddingRight,
+                    bottom: item.paddingBottom,
+                })
+            }
+        }
+    });
+}
+
+paddingControl("$1")
