@@ -1,0 +1,16 @@
+<p>$1: <input id="count"><button id="create">Create</button></p>
+<!-- <p>$1: <input id="count"><button id="create">Create</button></p> -->
+
+<script>
+
+document.getElementById('create').onclick = () => {
+  const textbox = document.getElementById('count');
+  const count = parseInt(textbox.value, 10);
+  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+}
+
+document.getElementById('cancel').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+}
+
+</script>
