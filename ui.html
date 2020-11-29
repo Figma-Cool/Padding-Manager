@@ -7,11 +7,11 @@ bottom: <input id="bottom" /><br />
 <!-- <p>$1: <input id="count"><button id="create">Create</button></p> -->
 
 <script>
-  const padding$1Top = document.querySelector("#top");
-  const padding$1Left = document.querySelector("#left");
-  const padding$1Right = document.querySelector("#right");
-  const padding$1Bottom = document.querySelector("#bottom");
-  const button = document.querySelector("button");
+  const padding$1Top = document.querySelector('#top');
+  const padding$1Left = document.querySelector('#left');
+  const padding$1Right = document.querySelector('#right');
+  const padding$1Bottom = document.querySelector('#bottom');
+  const button = document.querySelector('button');
 
   window.onmessage = async (event) => {
     pmsg = event.data.pluginMessage;
@@ -24,11 +24,12 @@ bottom: <input id="bottom" /><br />
 
   button.onclick = () => {
     let $1 = {
+      type: '$1',
       top: padding$1Top.value,
       left: padding$1Left.value,
       right: padding$1Right.value,
       bottom: padding$1Bottom.value,
     };
-    parent.postMessage({ pluginMessage: { type: "$1", value: $1 } }, "*");
+    parent.postMessage({ pluginMessage: { type: '$1', value: $1 } }, '*');
   };
 </script>
