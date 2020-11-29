@@ -1,4 +1,4 @@
-figma.showUI(__html__, { width: 300, height: 400 });
+figma.showUI(__html__, { width: 400, height: 225 });
 
 const allLayers = figma.currentPage.findAll();
 let $1;
@@ -24,6 +24,7 @@ const setPadding = (item, paddings) => {
   item.parent.paddingBottom = Number(paddings.bottom);
   item.parent.paddingLeft = Number(paddings.left);
   item.parent.paddingRight = Number(paddings.right);
+  item.parent.resize(item.parent.width, item.parent.height);
 };
 
 const paddingControl = (paddings) => {
@@ -36,11 +37,11 @@ const paddingControl = (paddings) => {
         item.parent.layoutMode = 'VERTICAL';
         setPadding(item, paddings);
       } else {
-        // setPadding(item, paddings);
         item.paddingTop = Number(paddings.top);
         item.paddingBottom = Number(paddings.bottom);
         item.paddingLeft = Number(paddings.left);
         item.paddingRight = Number(paddings.right);
+        item.resize(item.width, item.height);
         // figma.ui.postMessage({
         //   top: item.paddingTop,
         //   left: item.paddingLeft,
@@ -55,7 +56,17 @@ const paddingControl = (paddings) => {
 figma.ui.onmessage = (msg) => {
   if (msg.type === '$1') {
     console.log(msg.value);
-    $1 = msg.value;
+    let $1 = msg.value;
     paddingControl($1);
+  }
+  if (msg.type === '$2') {
+    console.log(msg.value);
+    let $2 = msg.value;
+    paddingControl($2);
+  }
+  if (msg.type === '$3') {
+    console.log(msg.value);
+    let $3 = msg.value;
+    paddingControl($3);
   }
 };

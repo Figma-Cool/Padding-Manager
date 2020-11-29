@@ -1,17 +1,52 @@
-$1: <br />
-top: <input id="top" /><br />
-left: <input id="left" /><br />
-right: <input id="right" /><br />
-bottom: <input id="bottom" /><br />
-<button>ok</button>
-<!-- <p>$1: <input id="count"><button id="create">Create</button></p> -->
+<div id="main">
+  <div class="one">
+    <h3>$1</h3>
+    <div class="input-box">
+      <div>Top: <input id="top1" /></div>
+      <div>Bottom: <input id="bottom1" /></div>
+      <div>Left: <input id="left1" /></div>
+      <div>Right: <input id="right1" /></div>
+      <button id="button1">OK</button>
+    </div>
+  </div>
+  <div class="two">
+    <h3>$2</h3>
+    <div class="input-box">
+      <div>Top: <input id="top2" /></div>
+      <div>Bottom: <input id="bottom2" /></div>
+      <div>Left: <input id="left2" /></div>
+      <div>Right: <input id="right2" /></div>
+      <button id="button2">OK</button>
+    </div>
+  </div>
+  <div class="three">
+    <h3>$3</h3>
+    <div class="input-box">
+      <div>Top: <input id="top3" /></div>
+      <div>Bottom: <input id="bottom3" /></div>
+      <div>Left: <input id="left3" /></div>
+      <div>Right: <input id="right3" /></div>
+      <button id="button3">OK</button>
+    </div>
+  </div>
+</div>
 
 <script>
-  const padding$1Top = document.querySelector('#top');
-  const padding$1Left = document.querySelector('#left');
-  const padding$1Right = document.querySelector('#right');
-  const padding$1Bottom = document.querySelector('#bottom');
-  const button = document.querySelector('button');
+  const padding$1Top = document.querySelector('#top1');
+  const padding$1Left = document.querySelector('#left1');
+  const padding$1Right = document.querySelector('#right1');
+  const padding$1Bottom = document.querySelector('#bottom1');
+  const button$1 = document.querySelector('#button1');
+  const padding$2Top = document.querySelector('#top2');
+  const padding$2Left = document.querySelector('#left2');
+  const padding$2Right = document.querySelector('#right2');
+  const padding$2Bottom = document.querySelector('#bottom2');
+  const button$2 = document.querySelector('#button2');
+  const padding$3Top = document.querySelector('#top3');
+  const padding$3Left = document.querySelector('#left3');
+  const padding$3Right = document.querySelector('#right3');
+  const padding$3Bottom = document.querySelector('#bottom3');
+  const button$3 = document.querySelector('#button3');
   const inputs = document.querySelectorAll('input');
 
   inputs.forEach((item) => {
@@ -29,7 +64,7 @@ bottom: <input id="bottom" /><br />
     padding$1Bottom.value = pmsg.bottom;
   };
 
-  button.onclick = () => {
+  button$1.onclick = () => {
     let $1 = {
       type: '$1',
       top: padding$1Top.value,
@@ -39,4 +74,142 @@ bottom: <input id="bottom" /><br />
     };
     parent.postMessage({ pluginMessage: { type: '$1', value: $1 } }, '*');
   };
+
+  button$2.onclick = () => {
+    let $2 = {
+      type: '$2',
+      top: padding$2Top.value,
+      left: padding$2Left.value,
+      right: padding$2Right.value,
+      bottom: padding$2Bottom.value,
+    };
+    parent.postMessage({ pluginMessage: { type: '$2', value: $2 } }, '*');
+  };
+
+  button$3.onclick = () => {
+    let $3 = {
+      type: '$3',
+      top: padding$3Top.value,
+      left: padding$3Left.value,
+      right: padding$3Right.value,
+      bottom: padding$3Bottom.value,
+    };
+    parent.postMessage({ pluginMessage: { type: '$3', value: $3 } }, '*');
+  };
 </script>
+
+<style>
+  #main {
+    padding: 12px;
+  }
+  input {
+    width: 100%;
+    max-width: calc(100% / 10);
+    margin-bottom: 8px;
+  }
+
+  .input-box > div {
+    display: inline;
+    margin-right: 8px;
+  }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 500;
+    padding-bottom: 8px;
+  }
+
+  .two,
+  .three h3 {
+    margin-top: 12px;
+  }
+
+  input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    transition: all 0.1s ease;
+  }
+
+  input:hover {
+    border-color: rgba(0, 0, 0, 0.8);
+  }
+  input:focus {
+    border-color: #1a9ffb;
+    box-shadow: 0 0 0 1px #1a9ffb;
+  }
+
+  button {
+    background-color: #1a9ffb;
+    padding: 3px 8px;
+    color: white;
+    border-radius: 2px;
+    margin-top: 4px;
+    transition: all 0.1s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+  button:focus {
+    box-shadow: 0 0 0 2px inset hsl(205, 97%, 40%);
+  }
+
+  .one,
+  .two {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 12px;
+  }
+
+  /* -----reset------ */
+  * {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  div,
+  span {
+    cursor: default;
+    user-select: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+  }
+
+  button {
+    font: inherit;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+  }
+
+  hr {
+    margin: 0;
+    border: 0;
+  }
+
+  label {
+    display: block;
+  }
+
+  input {
+    margin: 0;
+    font: inherit;
+    /* border: 0; */
+    outline: 0;
+    cursor: default;
+    -webkit-appearance: none;
+  }
+
+  svg {
+    display: block;
+  }
+</style>
