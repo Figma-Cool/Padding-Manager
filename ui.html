@@ -12,6 +12,13 @@ bottom: <input id="bottom" /><br />
   const padding$1Right = document.querySelector('#right');
   const padding$1Bottom = document.querySelector('#bottom');
   const button = document.querySelector('button');
+  const inputs = document.querySelectorAll('input');
+
+  inputs.forEach((item) => {
+    item.onfocus = () => {
+      item.select();
+    };
+  });
 
   window.onmessage = async (event) => {
     pmsg = event.data.pluginMessage;

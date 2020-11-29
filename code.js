@@ -18,18 +18,18 @@ const createFrame = (item) => {
   item.y = 0;
 };
 
+const setPadding = (item, paddings) => {
+  console.log('setPadding', item, paddings);
+  item.parent.paddingTop = Number(paddings.top);
+  item.parent.paddingBottom = Number(paddings.bottom);
+  item.parent.paddingLeft = Number(paddings.left);
+  item.parent.paddingRight = Number(paddings.right);
+};
+
 const paddingControl = (paddings) => {
   console.log('paddingControl');
-  const setPadding = (item, paddings) => {
-    console.log('setPadding',item, paddings);
-    item.paddingTop = paddings.top.toString();
-    item.parent.paddingBottom = paddings.bottom;
-    item.parent.paddingLeft = paddings.left;
-    item.parent.paddingRight = paddings.right;
-  };
   allLayers.forEach((item) => {
     if (item.name.includes(paddings.type)) {
-      console.log(item);
       if (!item.layoutMode) {
         createFrame(item);
         item.name = item.name.replace(paddings.type, '');
@@ -37,6 +37,10 @@ const paddingControl = (paddings) => {
         setPadding(item, paddings);
       } else {
         // setPadding(item, paddings);
+        item.paddingTop = Number(paddings.top);
+        item.paddingBottom = Number(paddings.bottom);
+        item.paddingLeft = Number(paddings.left);
+        item.paddingRight = Number(paddings.right);
         // figma.ui.postMessage({
         //   top: item.paddingTop,
         //   left: item.paddingLeft,
